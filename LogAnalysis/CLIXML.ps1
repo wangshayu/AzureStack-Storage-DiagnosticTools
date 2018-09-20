@@ -7,8 +7,8 @@ $utilityFuncModelPath = Join-Path @(Split-Path -Parent $Script:MyInvocation.MyCo
 Import-Module $utilityFuncModelPath -Force
 
 # Linking Computers To Shared Resources
-$domainUserName = "v-jizhou@microsoft.com"
-$domainPassWord = "OpsMgr2008R2!"
+$domainUserName = "XXXXXXXXXX@microsoft.com"
+$domainPassWord = "XXXXXXXXXXX"
 net use \\ecg /user:$domainUserName $domainPassWord
 
 # Download Configuration
