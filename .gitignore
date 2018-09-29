@@ -3,6 +3,6 @@
 ################################################################################
 
 /.vs
-/CIAnalysis/HealthAnalysisModule
 /CIAnalysis/UtilityFunction.psm1
+/CIAnalysis/HealthAnalysisModule/GetPhysicalDisk.psm1
 /CIAnalysis/CLIXML.ps1
