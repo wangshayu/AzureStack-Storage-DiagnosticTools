@@ -5,5 +5,4 @@
 /.vs
 /CIAnalysis/HealthAnalysisModule
 /CIAnalysis/UtilityFunction.psm1
-/CIAnalysis/UnitTesting.ps1
 /CIAnalysis/CLIXML.ps1
