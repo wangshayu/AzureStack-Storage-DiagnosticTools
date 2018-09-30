@@ -53,23 +53,7 @@ $healthTestZipFileFullPath |% `
     # Analysis CLI XML Content
     $CLIXMLFiles |% `
     {
-        # Get CLI XML File Name
         $CliFilesName = GetFileNameWithoutExtension -fullFilePath $_
-
-        # Import Health Analysis Module Script
-        $modelScriptFullPath = Join-Path @(GetCurrentScriptFilePath) "HealthAnalysisModule\${CliFilesName}.psm1"
-        if(-not (Test-Path -Path $modelScriptFullPath))
-        {
-            Write-Host "Missing Health Analysis Module Script File :" $modelScriptFullPath -BackgroundColor Red
-            return $null
-        }
-
-        Import-Module $modelScriptFullPath -Force
-
-        # Importing PS Custom Object That To Be Analyzed
-        $local:analyzeObject = CLIXMLToPSCustomObject -cliXmlPath $_
-
-        # Analysis PS Custom Object
-        $Global:analysisScript.Invoke()
+        GetCIAnalysisPSObject -CLIXmlPath $_ -DownloadZipFilePathRoot $downloadFilePath
     }
 }

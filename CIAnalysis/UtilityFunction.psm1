@@ -187,3 +187,59 @@ Function DownloadAndExtractZipFiles
     ExtractZipFilesToDirectory -zipFilePathList $zipFilePathList -destinationDirectoryName $targetFilePath
     $zipFilePathList
 }
+
+
+<#
+    .Synopsis
+    Load CLI XML And Return CI Analysis PSObject
+
+    .parameter DownloadZipFilePathRoot
+    The download Zip file path root of test log zip
+
+    .Return
+    A PSCustomObject array of CI Analysis PSObjects.
+#>
+Function GetCIAnalysisPSObject
+{
+    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $CLIXmlPath,
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $DownloadZipFilePathRoot
+    )
+
+    # Import Health Analysis Module Script
+    $cliFilesName = GetFileNameWithoutExtension -fullFilePath $CLIXmlPath
+    $modelScriptFullPath = Join-Path @(GetCurrentScriptFilePath) "HealthAnalysisModule\${cliFilesName}.psm1"
+
+    if(-not (Test-Path -Path $modelScriptFullPath))
+    {
+       Write-Host "Missing Health Analysis Module Script File :" $modelScriptFullPath -BackgroundColor Red
+       return $null
+    }
+
+    Import-Module $modelScriptFullPath -Force
+
+    # Importing PS Custom Object That To Be Analyzed
+    $local:analyzeObject = CLIXMLToPSCustomObject -cliXmlPath $CLIXmlPath
+
+    # Check The Content Of The CLI XML
+    if($local:analyzeObject -eq $null)
+    {
+        Write-Host "This Is A CLI XML Without Content Or Illegality :" $CLIXmlPath -BackgroundColor Red
+        return $null
+    }
+
+    # Analysis PS Custom Object
+    $local:CIAnalysisPSObjectSet = AnalysisPSObject -AnalyzeObject $local:analyzeObject -DownloadFilePath $DownloadZipFilePathRoot
+
+    # The CI Analysis PSObject results are stored in this local variable CIAnalysisPSObjectSet
+    return $local:CIAnalysisPSObjectSet
+}

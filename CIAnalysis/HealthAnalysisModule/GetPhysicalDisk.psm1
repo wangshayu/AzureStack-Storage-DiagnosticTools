@@ -1,15 +1,29 @@
 <#
     The script block be used to parsing PS custom objects.
     We can make some customized analysis operations for the PS custom objects in this script block.
-    The PS custom objects is stored in the script variable '$analyzeObject'.
+    The PS custom objects is stored in the script variable '$AnalyzeObject'.
 #>
-[ScriptBlock] $Global:analysisScript = `
-{  
+
+Function AnalysisPSObject
+{
+    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [PSCustomObject[]] $AnalyzeObject,
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $DownloadFilePath
+    )
+
     #
     # Preview PS Custom Object
     #
     Write-Host "[GetPhysicalDisk] begins to be analyzed. `n"  -BackgroundColor Green
-    #$analyzeObject
 
     #
     # Analysis Operations Here
@@ -39,20 +53,19 @@
     }
 
     # Screening Out 'Down' Physical Disk :
-    $analyzeObject |% `
+    $AnalyzeObject |% `
     {
         [CimInstance]$physicalDisk = [CimInstance]$_
 
         if(([PhysicalDiskHealthStatus]$physicalDisk.HealthStatus -ne "Healthy"))
         {
             Write-Host "[Physical Disk Friendly Name]" $physicalDisk.FriendlyName "health status is" ([PhysicalDiskHealthStatus]$physicalDisk.HealthStatus) -BackgroundColor Red
-            $physicalDisk
         }
     }
 
 
     # Get All Event Files From Download File Path: 
-    $EVTXFiles = GetFileNamesByPathAndExtension -path $downloadFilePath -fileExtension "EVTX" -Recurse
+    $EVTXFiles = GetFileNamesByPathAndExtension -path $DownloadFilePath -fileExtension "EVTX" -Recurse
 
     # Filter Target EVTX Files
     $targetEVTXFiles = $EVTXFiles |? { $_.ToLower().Contains("Event_Microsoft-Windows-StorageSpaces-Driver-Operational".ToLower()) }
@@ -66,7 +79,7 @@
 
 
     # Get CSV Log From Download File Path
-    $logFilePathSet = GetFileNamesByPathAndExtension -path $downloadFilePath -fileExtension "log" -Recurse
+    $logFilePathSet = GetFileNamesByPathAndExtension -path $DownloadFilePath -fileExtension "log" -Recurse
     $SLBDiskCSVLogFiles = $logFilePathSet |? { $_.ToLower().Contains("\Cluster.log".ToLower()) }
     $AllSLBDiskCSVContentSet = $SLBDiskCSVLogFiles |% `
     {
@@ -100,8 +113,8 @@
         $CIAnalysisPSObject
     }
 
+    Write-Host "[GetPhysicalDisk] was analyzed. `n"  -BackgroundColor Green
+
     # Output CI Analysis PS Object Set
     $CIAnalysisPSObjectSet
-
-    Write-Host "[GetPhysicalDisk] was analyzed. `n"  -BackgroundColor Green
 }

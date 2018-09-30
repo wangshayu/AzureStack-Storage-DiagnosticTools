@@ -160,3 +160,9 @@ $PSObject = CreatePSCustomObjectWithNoteProperty -Property ([Ordered]@{Name="Ser
 $PSObject | AddNotePropertyIntoPSCustomObject -PropertyName "SystemDirectory" -PropertyValue "C:\WINDOWS\system32"
 
 $PSObject | AddNotePropertiesIntoPSCustomObject -Property ([Ordered]@{"RegisteredUser"="Windows User";"BuildNumber"="17134"})
+
+
+<#
+    Load CLI XML And Get CI Analysis PSObject
+#>
+$PhysicalDiskPSObject = GetCIAnalysisPSObject -CLIXmlPath "C:\Users\v-jizhou\Desktop\Download\Storage-part3-20180505055812\ASRR1N22R14U01\StorageDiagnosticInfo\HealthTest-s-cluster-20180505-0551\GetPhysicalDisk.XML" -DownloadZipFilePathRoot "C:\Users\v-jizhou\Desktop\Download"
