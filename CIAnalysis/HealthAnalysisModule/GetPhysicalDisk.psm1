@@ -90,7 +90,7 @@
         $SLBDiskCSVRows = $AllSLBDiskCSVContentSet |% `
         { 
             # One SLB Disk CSV Content
-            if($_[0].DiskId.ToLower().Contains($objectID.ToLower()))
+            if($_.DiskId.ToLower().Contains($objectID.ToLower()))
             {
                 $_
             } 
