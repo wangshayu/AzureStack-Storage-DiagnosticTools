@@ -11,7 +11,7 @@
 #>
 Function GetCSVTextFromLogFile
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -44,7 +44,7 @@ Function GetCSVTextFromLogFile
 #>
 Function GetCSVTextFromLogFileRX
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -78,7 +78,7 @@ Function GetCSVTextFromLogFileRX
 #>
 Function GetCsvValueByColumnNames
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -129,7 +129,7 @@ Function GetCsvValueByColumnNames
 #>
 Function GetCsvValueFromTestContentByColumnNames
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -142,7 +142,7 @@ Function GetCsvValueFromTestContentByColumnNames
         [string[]] $columnNames
     )
 
-    $tempCSVFileName = "C:\Windows\Temp\{0}.csv" -f [Guid]::NewGuid().ToString()
+    $tempCSVFileName = "$env:SystemDrive\Windows\Temp\{0}.csv" -f [Guid]::NewGuid().ToString()
     $csvTestContent.Trim() | Out-File -FilePath $tempCSVFileName -Encoding unicode
     [System.Collections.Generic.List`1[Object]] $result = GetCsvValueByColumnNames -csvFilePath $tempCSVFileName -columnNames $columnNames
     Remove-Item -Path $tempCSVFileName -Force | Out-Null
@@ -162,7 +162,7 @@ Function GetCsvValueFromTestContentByColumnNames
 #>
 Function GetCustomObjectsFromTestContentByColumnNames
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -175,7 +175,7 @@ Function GetCustomObjectsFromTestContentByColumnNames
         [string[]] $columnNames
     )
 
-    $tempCSVFileName = "C:\Windows\Temp\{0}.csv" -f [Guid]::NewGuid().ToString()
+    $tempCSVFileName = "$env:SystemDrive\Windows\Temp\{0}.csv" -f [Guid]::NewGuid().ToString()
     $csvTestContent.Trim() | Out-File -FilePath $tempCSVFileName -Encoding unicode
     $result = Import-Csv -Path $tempCSVFileName -Header $columnNames
     Remove-Item -Path $tempCSVFileName -Force | Out-Null

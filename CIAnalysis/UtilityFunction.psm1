@@ -5,12 +5,14 @@ $fileHelperModelPath = Join-Path $currentDir "FileHelper.psm1"
 $CSVHelperModelPath = Join-Path $currentDir "CSVHelper.psm1"
 $eventHelperModelPath = Join-Path $currentDir "WindowsEventHelper.psm1"
 $CLIHelperModelPath = Join-Path $currentDir "CLIHelper.psm1"
+$PSCredentialHelperModelPath = Join-Path $currentDir "PSCredentialHelper.psm1"
 
 Import-Module $testHelperModelPath -Force
 Import-Module $fileHelperModelPath -Force
 Import-Module $CSVHelperModelPath -Force
 Import-Module $eventHelperModelPath -Force
 Import-Module $CLIHelperModelPath -Force
+Import-Module $PSCredentialHelperModelPath -Force
 
 <#
     .Synopsis
@@ -18,11 +20,41 @@ Import-Module $CLIHelperModelPath -Force
 #>
 Function GetCurrentScriptFilePath
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param()
 
     Split-Path -Parent $Script:MyInvocation.MyCommand.Definition
 }
+
+<#
+    .Synopsis
+    Linking Computers To Shared Resources
+#>
+Function ConnectSharedResource
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $DomainUserName,
+
+        [Parameter(Mandatory=$false)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $DomainPassWord,
+
+        [Parameter(Mandatory=$false)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $ResourceNetWorkPath
+    )
+
+    [System.IO.DirectoryInfo] $rootPath = [System.IO.DirectoryInfo]::new($ResourceNetWorkPath)
+    net use $($rootPath.Root.FullName) /user:$DomainUserName $DomainPassWord
+}
+
 
 
 <#
@@ -31,7 +63,7 @@ Function GetCurrentScriptFilePath
 #>
 Function CreatePSCustomObjectForCIAnalysis
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -70,7 +102,7 @@ Function CreatePSCustomObjectForCIAnalysis
 #>
 Function GetZipFilePathByPathAndTestName
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -100,7 +132,7 @@ Function GetZipFilePathByPathAndTestName
 #>
 Function DownloadZipFilesByTestName
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -125,6 +157,11 @@ Function DownloadZipFilesByTestName
     )
 
     $zipFilePathList =  GetZipFilePathByPathAndTestName -zipFilePath $zipFileRootPath -testName $testName
+    if($zipFilePathList -eq $null)
+    {
+        return $null
+    }
+
     return $zipFilePathList |% `
     { 
         Write-Host "Copy Zip File From" $_ "To" $targetFilePath "`n"
@@ -159,7 +196,7 @@ Function DownloadZipFilesByTestName
 #>
 Function DownloadAndExtractZipFiles
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -183,7 +220,14 @@ Function DownloadAndExtractZipFiles
     )
 
     $zipFilePathList = DownloadZipFilesByTestName -zipFileRootPath $zipFileRootPath -targetFilePath $targetFilePath -testName $testName -maxRetryCount $maxRetryCount
-    ExtractZipFilesToDirectory -zipFilePathList $zipFilePathList -destinationDirectoryName $targetFilePath
+    if($zipFilePathList -ne $null)
+    {
+        ExtractZipFilesToDirectory -zipFilePathList $zipFilePathList -destinationDirectoryName $targetFilePath
+    }
+    else
+    {
+        Write-Host "The specified file does not exist." -ForegroundColor Red
+    }
     $zipFilePathList
 }
 
@@ -200,7 +244,7 @@ Function DownloadAndExtractZipFiles
 #>
 Function GetCIAnalysisPSObject
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]

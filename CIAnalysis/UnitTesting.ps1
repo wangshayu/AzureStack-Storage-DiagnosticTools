@@ -3,6 +3,14 @@ $currentDir = Split-Path -Parent $Script:MyInvocation.MyCommand.Definition
 $utilityFuncModelPath = Join-Path $currentDir "UtilityFunction.psm1"
 Import-Module $utilityFuncModelPath -Force
 
+<#
+    Get Plain Text PWD From PSCredential
+#>
+$domainUserName = "Tom"
+$domainPassWord = "123456A"
+$securePword =  ConvertTo-SecureString -String $domainPassWord -AsPlainText -Force
+[System.Management.Automation.PSCredential] $PSCred = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $domainUserName, $securePword
+Write-Host "PlainText PWD :" $PSCred | GetPlainTextPWDFromPSCredential
 
 <#
     Download And Extract Zip Files
@@ -166,3 +174,22 @@ $PSObject | AddNotePropertiesIntoPSCustomObject -Property ([Ordered]@{"Registere
     Load CLI XML And Get CI Analysis PSObject
 #>
 $PhysicalDiskPSObject = GetCIAnalysisPSObject -CLIXmlPath "C:\Users\v-jizhou\Desktop\Download\Storage-part3-20180505055812\ASRR1N22R14U01\StorageDiagnosticInfo\HealthTest-s-cluster-20180505-0551\GetPhysicalDisk.XML" -DownloadZipFilePathRoot "C:\Users\v-jizhou\Desktop\Download"
+
+
+<#
+    Load CLI XML And Get CI Analysis PSObject
+#>
+[string] $domainUserName = "XXXXXX@microsoft.com"
+[string] $domainPassWord = "XXXXXX"
+[string] $zipFileRootPath = "\\ecg\azurestack\MasVP\MASCILogs\14393.0.161119-1705-MAS_Prod_1.1810.0.22\4daec17e-6986-b3f4-2a88-86e837065bb4-10-03-2018-21.16.49\BVTResults\AzureStackLogs-20181005073849"
+[string] $downloadFilePath = "C:\Users\v-jizhou\Desktop\Download"
+[string] $testName = "Storage"
+
+$securePword =  ConvertTo-SecureString -String $domainPassWord -AsPlainText -Force
+[System.Management.Automation.PSCredential] $PSCred = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $domainUserName, $securePword
+
+. "$currentDir\CLIXML.ps1" `
+        -credential $PSCred `
+        -zipFileRootPath $zipFileRootPath `
+        -downloadFilePath $downloadFilePath `
+        -testName $testName

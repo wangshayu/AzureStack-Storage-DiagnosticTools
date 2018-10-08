@@ -13,7 +13,7 @@
 #>
 Function GetFileNamesByPathAndExtension
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -57,7 +57,7 @@ Function GetFileNamesByPathAndExtension
 #>
 Function GetFileNameWithoutExtension
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -90,7 +90,7 @@ Function GetFileNameWithoutExtension
 #>
 Function CopyFileWithRetry
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -144,7 +144,7 @@ Function CopyFileWithRetry
 #>
 Function ExtractZipFileToDirectory
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -188,7 +188,7 @@ Function ExtractZipFileToDirectory
 #>
 Function ExtractZipFilesToDirectory
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]

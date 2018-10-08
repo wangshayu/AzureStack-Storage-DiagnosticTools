@@ -16,7 +16,7 @@ Function GetWindowsEventsByPath
 
 Function GetEventsFromEventSetByEventId
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -41,7 +41,7 @@ Function GetEventsFromEventSetByEventId
 
 Function GetEventsFromEventSetByProcessId
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -66,7 +66,7 @@ Function GetEventsFromEventSetByProcessId
 
 Function GetEventsFromEventSetByLevelDisplayName
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -91,7 +91,7 @@ Function GetEventsFromEventSetByLevelDisplayName
 
 Function GetEventsFromEventSetByMachineName
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -116,7 +116,7 @@ Function GetEventsFromEventSetByMachineName
 
 Function GetEventsFromEventSetByProviderName
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -142,7 +142,7 @@ Function GetEventsFromEventSetByProviderName
 
 Function GetEventsFromEventSetByProviderId
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -167,7 +167,7 @@ Function GetEventsFromEventSetByProviderId
 
 Function GetEventsFromEventSetByTimeCreated
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -195,7 +195,7 @@ Function GetEventsFromEventSetByTimeCreated
 
 Function GetValuesFromEventByXpaths
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -214,7 +214,7 @@ Function GetValuesFromEventByXpaths
 
 Function GetEventXMLNamespaces
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -229,7 +229,7 @@ Function GetEventXMLNamespaces
 
 Function GetEventSystemNameAndGuid
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -244,7 +244,7 @@ Function GetEventSystemNameAndGuid
 
 Function GetEventSystemEventID
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -259,7 +259,7 @@ Function GetEventSystemEventID
 
 Function GetEventSystemVersion
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -274,7 +274,7 @@ Function GetEventSystemVersion
 
 Function GetEventSystemLevel
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -289,7 +289,7 @@ Function GetEventSystemLevel
 
 Function GetEventSystemTask
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -304,7 +304,7 @@ Function GetEventSystemTask
 
 Function GetEventSystemOpcode
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -319,7 +319,7 @@ Function GetEventSystemOpcode
 
 Function GetEventSystemKeywords
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -334,7 +334,7 @@ Function GetEventSystemKeywords
 
 Function GetEventSystemTimeCreated
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -349,7 +349,7 @@ Function GetEventSystemTimeCreated
 
 Function GetEventSystemEventRecordID
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -364,7 +364,7 @@ Function GetEventSystemEventRecordID
 
 Function GetEventSystemCorrelation
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -379,7 +379,7 @@ Function GetEventSystemCorrelation
 
 Function GetEventSystemExecutionProcessIDAndThreadID
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -394,7 +394,7 @@ Function GetEventSystemExecutionProcessIDAndThreadID
 
 Function GetEventSystemChannel
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -409,7 +409,7 @@ Function GetEventSystemChannel
 
 Function GetEventSystemComputer
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -424,7 +424,7 @@ Function GetEventSystemComputer
 
 Function GetEventSystemSecurity
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -439,7 +439,7 @@ Function GetEventSystemSecurity
 
 Function GetEventEventDataId
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -454,7 +454,7 @@ Function GetEventEventDataId
 
 Function GetEventEventDataStatus
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -469,7 +469,7 @@ Function GetEventEventDataStatus
 
 Function GetEventEventDataDeviceNumber
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -484,7 +484,7 @@ Function GetEventEventDataDeviceNumber
 
 Function GetEventEventDataDriveManufacturer
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -499,7 +499,7 @@ Function GetEventEventDataDriveManufacturer
 
 Function GetEventEventDataDriveModel
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -514,7 +514,7 @@ Function GetEventEventDataDriveModel
 
 Function GetEventEventDataDriveSerial
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -529,7 +529,7 @@ Function GetEventEventDataDriveSerial
 
 Function GetEventEventDataEnclosureManufacturer
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -544,7 +544,7 @@ Function GetEventEventDataEnclosureManufacturer
 
 Function GetEventEventDataEnclosureModel
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -559,7 +559,7 @@ Function GetEventEventDataEnclosureModel
 
 Function GetEventEventDataEnclosureSerial
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -574,7 +574,7 @@ Function GetEventEventDataEnclosureSerial
 
 Function GetEventEventDataSlot
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]

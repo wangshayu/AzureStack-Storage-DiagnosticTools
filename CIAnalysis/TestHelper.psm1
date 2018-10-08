@@ -10,7 +10,7 @@
 #>
 Function GetTextBetweenTwoLines
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -52,7 +52,7 @@ Function GetTextBetweenTwoLines
 #>
 Function GetRegexMatchFirstResult
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]

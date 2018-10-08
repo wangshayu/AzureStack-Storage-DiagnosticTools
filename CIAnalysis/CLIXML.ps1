@@ -1,20 +1,35 @@
-﻿<#
+﻿[CmdletBinding()]
+Param
+(
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNull()]
+    [System.Management.Automation.PSCredential] $credential,
 
-#>
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNullOrEmpty()]
+    [string] $zipFileRootPath,
+
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [string] $downloadFilePath,
+
+    [Parameter(Mandatory=$true)]
+    [ValidateNotNull()]
+    [ValidateNotNullOrEmpty()]
+    [string] $testName
+)
 
 # Import Utility Function Module Script
 $utilityFuncModelPath = Join-Path @(Split-Path -Parent $Script:MyInvocation.MyCommand.Definition) "UtilityFunction.psm1"
 Import-Module $utilityFuncModelPath -Force
 
-# Linking Computers To Shared Resources
-$domainUserName = "v-jizhou@microsoft.com"
-$domainPassWord = "OpsMgr2008R2!"
-net use \\ecg /user:$domainUserName $domainPassWord
+# Get PlainText PWD
+$domainUserName = $credential.UserName
+$domainPassWord = $credential | GetPlainTextPWDFromPSCredential
 
-# Download Configuration
-$zipFileRootPath = "\\ecg\azurestack\MasVP\MASCILogs\14393.0.161119-1705-MAS_Prod_1.1810.0.22\fe7713e7-2c79-642c-be71-39817e58d33f-09-23-2018-18.46.33\BVTResults\AzureStackLogs-20180924212655"
-$downloadFilePath = "C:\Users\v-jizhou\Desktop\Download"
-$testName = "Storage"
+# Linking Computers To Shared Resources
+ConnectSharedResource -ResourceNetWorkPath $zipFileRootPath -DomainUserName $domainUserName -DomainPassWord $domainPassWord
 
 # Second Level Zip File Selection
 [ScriptBlock] $filter = `
@@ -27,10 +42,10 @@ $testName = "Storage"
 }
 
 # Download And Extract Zip Files
-#$localZIPFileFullPath = DownloadAndExtractZipFiles -zipFileRootPath $zipFileRootPath -targetFilePath $downloadFilePath -testName $testName -maxRetryCount 3
+$localZIPFileFullPath = DownloadAndExtractZipFiles -zipFileRootPath $zipFileRootPath -targetFilePath $downloadFilePath -testName $testName -maxRetryCount 3
 
 # Delete Zip Files
-#Remove-Item -Path $localZIPFileFullPath -ErrorAction Ignore -Force
+Remove-Item -Path $localZIPFileFullPath -ErrorAction Ignore -Force
 
 # Get All HealthTest.zip (Under folder StorageDiagnosticInfo)
 $healthTestZipFileFullPath = GetFileNamesByPathAndExtension -path $downloadFilePath -fileExtension "zip" -Recurse

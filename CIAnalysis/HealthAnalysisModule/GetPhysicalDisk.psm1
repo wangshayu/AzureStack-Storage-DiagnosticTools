@@ -6,7 +6,7 @@
 
 Function AnalysisPSObject
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]

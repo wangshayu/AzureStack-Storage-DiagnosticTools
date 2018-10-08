@@ -13,7 +13,7 @@
 #>
 Function CLIXMLToPSCustomObject
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$true)]
@@ -41,7 +41,7 @@ Function CLIXMLToPSCustomObject
 #>
 Function CreatePSCustomObjectWithNoteProperty
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(Mandatory=$false)]
@@ -59,7 +59,7 @@ Function CreatePSCustomObjectWithNoteProperty
 #>
 Function AddNotePropertyIntoPSCustomObject
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
@@ -88,7 +88,7 @@ Function AddNotePropertyIntoPSCustomObject
 #>
 Function AddNotePropertiesIntoPSCustomObject
 {
-    [CmdletBinding(SupportsShouldProcess=$False, ConfirmImpact="none")]
+    [CmdletBinding()]
     Param
     (
         [Parameter(ValueFromPipeline=$true)]
