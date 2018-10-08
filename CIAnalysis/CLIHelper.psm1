@@ -64,17 +64,14 @@ Function AddNotePropertyIntoPSCustomObject
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [PSCustomObject] $PSObject,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [Object] $PropertyName,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [Object] $PropertyValue
     )
 
@@ -96,12 +93,10 @@ Function AddNotePropertiesIntoPSCustomObject
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [PSCustomObject] $PSObject,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Collections.Hashtable] $Property
     )
 

@@ -21,7 +21,6 @@ Function GetEventsFromEventSetByEventId
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
@@ -47,7 +46,6 @@ Function GetEventsFromEventSetByProcessId
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
@@ -73,7 +71,6 @@ Function GetEventsFromEventSetByLevelDisplayName
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
@@ -99,7 +96,6 @@ Function GetEventsFromEventSetByMachineName
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
@@ -125,7 +121,6 @@ Function GetEventsFromEventSetByProviderName
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
@@ -152,7 +147,6 @@ Function GetEventsFromEventSetByProviderId
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
@@ -178,17 +172,14 @@ Function GetEventsFromEventSetByTimeCreated
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord[]] $EventLogRecordSet,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [DateTime] $StartTime,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [DateTime] $EndTime
     )
 
@@ -209,12 +200,10 @@ Function GetValuesFromEventByXpaths
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord,
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [string[]] $XPaths
     )
 
@@ -230,7 +219,6 @@ Function GetEventXMLNamespaces
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -246,7 +234,6 @@ Function GetEventSystemNameAndGuid
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -262,7 +249,6 @@ Function GetEventSystemEventID
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -278,7 +264,6 @@ Function GetEventSystemVersion
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -294,7 +279,6 @@ Function GetEventSystemLevel
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -310,7 +294,6 @@ Function GetEventSystemTask
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -326,7 +309,6 @@ Function GetEventSystemOpcode
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -342,7 +324,6 @@ Function GetEventSystemKeywords
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -358,7 +339,6 @@ Function GetEventSystemTimeCreated
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -374,7 +354,6 @@ Function GetEventSystemEventRecordID
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -390,7 +369,6 @@ Function GetEventSystemCorrelation
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -406,7 +384,6 @@ Function GetEventSystemExecutionProcessIDAndThreadID
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -422,7 +399,6 @@ Function GetEventSystemChannel
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -438,7 +414,6 @@ Function GetEventSystemComputer
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -454,7 +429,6 @@ Function GetEventSystemSecurity
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -470,7 +444,6 @@ Function GetEventEventDataId
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -486,7 +459,6 @@ Function GetEventEventDataStatus
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -502,7 +474,6 @@ Function GetEventEventDataDeviceNumber
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -518,7 +489,6 @@ Function GetEventEventDataDriveManufacturer
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -534,7 +504,6 @@ Function GetEventEventDataDriveModel
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -550,7 +519,6 @@ Function GetEventEventDataDriveSerial
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -566,7 +534,6 @@ Function GetEventEventDataEnclosureManufacturer
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -582,7 +549,6 @@ Function GetEventEventDataEnclosureModel
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -598,7 +564,6 @@ Function GetEventEventDataEnclosureSerial
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 
@@ -614,7 +579,6 @@ Function GetEventEventDataSlot
     (
         [Parameter(ValueFromPipeline=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [System.Diagnostics.Eventing.Reader.EventLogRecord] $EventLogRecord
     )
 

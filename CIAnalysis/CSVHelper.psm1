@@ -139,7 +139,6 @@ Function GetCsvValueFromTestContentByColumnNames
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [string[]] $columnNames
     )
 
@@ -173,7 +172,6 @@ Function GetCustomObjectsFromTestContentByColumnNames
 
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [string[]] $columnNames
     )
 

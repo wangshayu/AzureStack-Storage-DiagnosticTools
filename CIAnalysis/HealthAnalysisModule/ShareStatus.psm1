@@ -11,7 +11,6 @@ Function AnalysisPSObject
     (
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [PSCustomObject[]] $AnalyzeObject,
 
         [Parameter(Mandatory=$true)]

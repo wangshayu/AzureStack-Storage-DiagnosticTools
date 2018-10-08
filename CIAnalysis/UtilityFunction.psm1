@@ -36,7 +36,6 @@ Function CreatePSCustomObjectForCIAnalysis
     (
         [Parameter(Mandatory=$true)]
         [ValidateNotNull()]
-        [ValidateNotNullOrEmpty()]
         [PSCustomObject] $PSObject,
 
         [Parameter(Mandatory=$false)]
