@@ -260,7 +260,7 @@ Function GetCIAnalysisPSObject
 
     # Import Health Analysis Module Script
     $cliFilesName = GetFileNameWithoutExtension -fullFilePath $CLIXmlPath
-    $modelScriptFullPath = Join-Path @(GetCurrentScriptFilePath) "HealthAnalysisModule\${cliFilesName}.psm1"
+    $modelScriptFullPath = Join-Path @(GetCurrentScriptFilePath) "SDDCAnalysisModule\${cliFilesName}.psm1"
 
     if(-not (Test-Path -Path $modelScriptFullPath))
     {

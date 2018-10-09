@@ -6,6 +6,7 @@ Param
     [System.Management.Automation.PSCredential] $credential,
 
     [Parameter(Mandatory=$true)]
+    [ValidateNotNull()]
     [ValidateNotNullOrEmpty()]
     [string] $zipFileRootPath,
 
