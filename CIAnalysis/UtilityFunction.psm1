@@ -80,7 +80,7 @@ Function CreatePSCustomObjectForCIAnalysis
         [System.Collections.Hashtable] $Property
     )
 
-    [System.Collections.Hashtable] $local:Property = `
+    [System.Collections.Hashtable] $local:Properties = `
     @{
         "Object" = $local:PSObject;
         "WindowsEvents" = $local:EventLogRecordSet;
@@ -88,7 +88,7 @@ Function CreatePSCustomObjectForCIAnalysis
         "Property" = $local:Property
     }
 
-    $CIAnalysisPSObject = CreatePSCustomObjectWithNoteProperty -Property $local:Property
+    $CIAnalysisPSObject = CreatePSCustomObjectWithNoteProperty -Property $local:Properties
     $CIAnalysisPSObject
 }
 
