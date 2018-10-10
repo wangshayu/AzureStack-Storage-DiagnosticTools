@@ -29,6 +29,10 @@ Import-Module $utilityFuncModelPath -Force
 $domainUserName = $credential.UserName
 $domainPassWord = $credential | GetPlainTextPWDFromPSCredential
 
+# Initialization Parameter
+$allCLIXMLFiles = $null
+$downloadFilePath | Out-Null
+
 # Linking Computers To Shared Resources
 ConnectSharedResource -ResourceNetWorkPath $zipFileRootPath -DomainUserName $domainUserName -DomainPassWord $domainPassWord
 
@@ -51,8 +55,8 @@ Remove-Item -Path $localZIPFileFullPath -ErrorAction Ignore -Force
 # Get All HealthTest.zip (Under folder StorageDiagnosticInfo)
 $healthTestZipFileFullPath = GetFileNamesByPathAndExtension -path $downloadFilePath -fileExtension "zip" -Recurse
 
-# Extract Every HealthTest.zip And Analysis CLI XML Content
-$healthTestZipFileFullPath |% `
+# Extract Every HealthTest.zip And Get All CLI XML Files
+$allCLIXMLFiles = $healthTestZipFileFullPath |% `
 {
     # Check and filter folders
     $filter.Invoke()
@@ -66,10 +70,15 @@ $healthTestZipFileFullPath |% `
     # Get All CLI XML Files
     $CLIXMLFiles = GetFileNamesByPathAndExtension -path $CLIXMLPath -fileExtension "xml"
 
-    # Analysis CLI XML Content
-    $CLIXMLFiles |% `
-    {
-        $CliFilesName = GetFileNameWithoutExtension -fullFilePath $_
-        GetCIAnalysisPSObject -CLIXmlPath $_ -DownloadZipFilePathRoot $downloadFilePath
-    }
+    # Return CLI XML Files
+    $CLIXMLFiles
+}
+
+# Initialization CI Parameters
+InitializationCI -AllCLIXMLFiles $allCLIXMLFiles -DownloadFilePath $downloadFilePath
+
+# Begin To Analysis CLI XML Content
+$allCLIXMLFiles |% `
+{
+    GetCIAnalysisPSObject -CLIXmlPath $_ -DownloadZipFilePathRoot $downloadFilePath
 }

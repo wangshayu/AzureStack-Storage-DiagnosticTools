@@ -193,3 +193,8 @@ $securePword =  ConvertTo-SecureString -String $domainPassWord -AsPlainText -For
         -zipFileRootPath $zipFileRootPath `
         -downloadFilePath $downloadFilePath `
         -testName $testName
+
+<#
+    Get CI Analysis PSObject By CLI Xml Name
+#>
+GetCIAnalysisPSObjectByName -CLIXmlName "GetPhysicalDisk"

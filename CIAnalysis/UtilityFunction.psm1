@@ -231,7 +231,6 @@ Function DownloadAndExtractZipFiles
     $zipFilePathList
 }
 
-
 <#
     .Synopsis
     Load CLI XML And Return CI Analysis PSObject
@@ -285,4 +284,73 @@ Function GetCIAnalysisPSObject
 
     # The CI Analysis PSObject results are stored in this local variable CIAnalysisPSObjectSet
     return $local:CIAnalysisPSObjectSet
+}
+
+
+<#
+    .Synopsis
+    Initialization CI Parameters
+#>
+Function InitializationCI
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string[]] $AllCLIXMLFiles,
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $DownloadFilePath
+    )
+
+    $script:allCLIXMLFiles = $AllCLIXMLFiles
+    $script:downloadFilePath = $DownloadFilePath
+}
+
+
+<#
+    .Synopsis
+    Get All CLI XML Files Full Path
+#>
+Function GetAllCLIXMLFiles
+{
+    [CmdletBinding()]
+    Param()
+
+    $script:allCLIXMLFiles
+}
+
+
+<#
+    .Synopsis
+    Load Specified CLI XML And Return CI Analysis PSObject By Xml File Name
+
+    .Return
+    A PSCustomObject array of CI Analysis PSObjects.
+#>
+Function GetCIAnalysisPSObjectByName
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $CLIXmlName
+    )
+
+    $targetCLIXmlFullPath = GetAllCLIXMLFiles |? `
+    { 
+        $fileName = GetFileNameWithoutExtension -fullFilePath $_
+        $fileName.ToLower() -eq $CLIXmlName.ToLower()
+    }
+    
+    if($targetCLIXmlFullPath -ne $null)
+    {
+        GetCIAnalysisPSObject -CLIXmlPath $targetCLIXmlFullPath -DownloadZipFilePathRoot $script:downloadFilePath
+    }
 }
