@@ -64,11 +64,20 @@ $allCLIXMLFiles = $healthTestZipFileFullPath |% `
     # Extract Every HealthTest.zip
     ExtractZipFileToDirectory -sourceArchiveFileName $_ -ToCurrentDir
 
-    # After Extract, Locate The Folder That Containing CLI XML Files.
-    $CLIXMLPath = GetFileNameWithoutExtension -fullFilePath $_ -AbsolutePath
+    # After Extract, Locate The Folder That Has Been Decompressed
+    $UnZipFilePath = GetFileNameWithoutExtension -fullFilePath $_ -AbsolutePath
+
+    # Get ZIP Files Under The The Folder
+    $ZipFileFullPath = GetFileNamesByPathAndExtension -path $UnZipFilePath -fileExtension "zip" -Recurse
+
+    # Decompressing These Second Level Zip Files
+    $ZipFileFullPath |% `
+    {
+        ExtractZipFileToDirectory -sourceArchiveFileName $_ -ToCurrentDir
+    }
 
     # Get All CLI XML Files
-    $CLIXMLFiles = GetFileNamesByPathAndExtension -path $CLIXMLPath -fileExtension "xml"
+    $CLIXMLFiles = GetFileNamesByPathAndExtension -path $UnZipFilePath -fileExtension "xml" -Recurse
 
     # Return CLI XML Files
     $CLIXMLFiles

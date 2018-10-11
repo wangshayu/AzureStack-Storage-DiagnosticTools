@@ -351,6 +351,9 @@ Function GetCIAnalysisPSObjectByName
     
     if($targetCLIXmlFullPath -ne $null)
     {
-        GetCIAnalysisPSObject -CLIXmlPath $targetCLIXmlFullPath -DownloadZipFilePathRoot $script:downloadFilePath
+        $targetCLIXmlFullPath |% `
+        {
+            GetCIAnalysisPSObject -CLIXmlPath $_ -DownloadZipFilePathRoot $script:downloadFilePath
+        }
     }
 }

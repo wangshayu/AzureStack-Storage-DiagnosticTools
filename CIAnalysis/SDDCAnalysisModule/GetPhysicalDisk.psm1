@@ -109,10 +109,15 @@ Function AnalysisPSObject
         }
 
         $CIAnalysisPSObject = CreatePSCustomObjectForCIAnalysis -PSObject $_ -EventLogRecordSet $WindowsEvents -CSVRecords $SLBDiskCSVRows
+        
+        # Return Single CIAnalysis PSObject
         $CIAnalysisPSObject
     }
 
     Write-Host "[GetPhysicalDisk] was analyzed. `n"  -BackgroundColor Green
+
+    # Run CmdLet To Implicit Conversion Of PS Object Types
+    Get-PhysicalDisk | Out-Null
 
     # Output CI Analysis PS Object Set
     $CIAnalysisPSObjectSet
