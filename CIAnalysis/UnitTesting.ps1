@@ -198,3 +198,10 @@ $securePword =  ConvertTo-SecureString -String $domainPassWord -AsPlainText -For
     Get CI Analysis PSObject By CLI Xml Name
 #>
 GetCIAnalysisPSObjectByName -CLIXmlName "GetPhysicalDisk"
+
+
+<#
+    Extract All Zip Files In The Specified Directory Path Recursively
+#>
+ExtractZipFileRecursion -zipFileRootPath "C:\Users\v-jizhou\Desktop\DownloadA"
+ExtractZipFileRecursion -zipFileRootPath "C:\Users\v-jizhou\Desktop\DownloadB" -DeleteOriginalZipFile

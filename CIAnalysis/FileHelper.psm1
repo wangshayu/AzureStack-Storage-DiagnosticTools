@@ -212,3 +212,47 @@ Function ExtractZipFilesToDirectory
         ExtractZipFileToDirectory -sourceArchiveFileName $_ -destinationDirectoryName $tempDestinationDirectoryName
     }
 }
+
+
+<#
+    .Synopsis
+    Extract All Zip Files In The Specified Directory Path Recursively
+
+    .parameter DeleteOriginalZipFile
+    After Extraction, Delete Those Original Files Or Not
+#>
+Function ExtractZipFileRecursion
+{
+    [CmdletBinding()]
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string] $zipFileRootPath,
+
+        [Parameter(Mandatory=$false)]
+        [switch] $DeleteOriginalZipFile
+    )
+
+    try
+    {
+        $ZipFileFullPath = GetFileNamesByPathAndExtension -path $zipFileRootPath -fileExtension "zip" -Recurse
+        $ZipFileFullPath |% `
+        {
+            $destinationDirectoryName = $_.Substring(0, $_.IndexOf("."))
+            Add-Type -AssemblyName 'System.IO.Compression.FileSystem'
+            [IO.Compression.ZipFile]::ExtractToDirectory($_, $destinationDirectoryName)
+            if($DeleteOriginalZipFile)
+            {
+                Remove-Item -Path $_ -Force | Out-Null
+            }
+            ExtractZipFileRecursion -zipFileRootPath $destinationDirectoryName -DeleteOriginalZipFile:$DeleteOriginalZipFile
+        }
+
+    }
+    catch [System.Exception]
+    {
+        Write-Host $Error[0]
+    }
+}
