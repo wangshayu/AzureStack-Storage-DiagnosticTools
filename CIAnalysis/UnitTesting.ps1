@@ -189,6 +189,7 @@ $securePword =  ConvertTo-SecureString -String $domainPassWord -AsPlainText -For
 [System.Management.Automation.PSCredential] $PSCred = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $domainUserName, $securePword
 
 . "$currentDir\CLIXML.ps1" `
+        -reDownload `
         -credential $PSCred `
         -zipFileRootPath $zipFileRootPath `
         -downloadFilePath $downloadFilePath `

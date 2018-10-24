@@ -18,7 +18,10 @@ Param
     [Parameter(Mandatory=$true)]
     [ValidateNotNull()]
     [ValidateNotNullOrEmpty()]
-    [string] $testName
+    [string] $testName,
+
+    [Parameter(Mandatory=$false)]
+    [switch] $reDownload
 )
 
 # Import Utility Function Module Script
@@ -46,11 +49,22 @@ ConnectSharedResource -ResourceNetWorkPath $zipFileRootPath -DomainUserName $dom
     Write-Host "This is :" $_
 }
 
-# Download And Extract Zip Files
-$localZIPFileFullPath = DownloadAndExtractZipFiles -zipFileRootPath $zipFileRootPath -targetFilePath $downloadFilePath -testName $testName -maxRetryCount 3
+# Download Extract And Delete Zip Files
+if($reDownload -eq $true)
+{
+    # Clear Download File Path
+    if(Test-Path $downloadFilePath)
+    {
+        Remove-Item $downloadFilePath -Recurse -Force
+    }
+    New-Item $downloadFilePath -ItemType Directory -Force
 
-# Delete Zip Files
-Remove-Item -Path $localZIPFileFullPath -ErrorAction Ignore -Force
+    # Download And Extract Zip Files
+    $localZIPFileFullPath = DownloadAndExtractZipFiles -zipFileRootPath $zipFileRootPath -targetFilePath $downloadFilePath -testName $testName -maxRetryCount 3
+
+    # Delete Download Zip Files
+    Remove-Item -Path $localZIPFileFullPath -ErrorAction Ignore -Force
+}
 
 # Get All HealthTest.zip (Under folder StorageDiagnosticInfo)
 $healthTestZipFileFullPath = GetFileNamesByPathAndExtension -path $downloadFilePath -fileExtension "zip" -Recurse
@@ -87,7 +101,9 @@ $allCLIXMLFiles = $healthTestZipFileFullPath |% `
 InitializationCI -AllCLIXMLFiles $allCLIXMLFiles -DownloadFilePath $downloadFilePath
 
 # Begin To Analysis CLI XML Content
+<#
 $allCLIXMLFiles |% `
 {
     GetCIAnalysisPSObject -CLIXmlPath $_ -DownloadZipFilePathRoot $downloadFilePath
 }
+#>
